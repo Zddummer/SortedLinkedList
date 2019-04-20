@@ -2,7 +2,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+/**
+* C implementation of a linked list. This list remains in
+* descending sorted order. Duplicates are allowed.
+*
+* @author Zach Dummer
+*/
 
+// creates an empty list
 struct SortedList * createSortedList() {
 	struct SortedList * list;
 	list = (struct SortedList *) malloc(sizeof(struct SortedList));
@@ -10,6 +17,7 @@ struct SortedList * createSortedList() {
 	return list;
 }
 
+// inserts integers while maintaining sorted order.
 void insertSorted(struct SortedList *aList, int x){
 	struct SortedNode *node;
 	node = (struct SortedNode *) malloc(sizeof(struct SortedNode));
@@ -42,6 +50,7 @@ void insertSorted(struct SortedList *aList, int x){
 	}
 }
 
+// removes each instance of an input integer
 void removeSorted(struct SortedList *aList, int x){
 	if(aList->head == NULL){
 		return;
@@ -52,13 +61,21 @@ void removeSorted(struct SortedList *aList, int x){
 
 	while(temp != NULL){
 		if(temp->data == x){
-			prev->next = temp->next;
+			if(prev != NULL){
+				prev->next = temp->next;
+				temp = temp->next;
+			} else {
+				aList->head = temp->next;
+				temp = temp->next;
+			}
+		} else {
+			prev = temp;
+			temp = temp->next;
 		}
-		prev = temp;
-		temp = temp->next;
 	}
 }
 
+// returns 1 if input integer is in the list, returns 0 otherwise
 int findSorted(struct SortedList *aList, int x){
 	if(aList->head == NULL){
 		return 0;
@@ -77,6 +94,7 @@ int findSorted(struct SortedList *aList, int x){
 	return 0;
 }
 
+// frees up space created by the input list
 void destroySortedList(struct SortedList *aList){
 	struct SortedNode * temp;
 	struct SortedNode * temp1;
@@ -89,6 +107,7 @@ void destroySortedList(struct SortedList *aList){
 	free(aList);
 }
 
+// prints the list in the order it is kept (descending)
 void printList(struct SortedList *aList){
 	printf("printing list\n");
 	struct SortedNode * temp;
