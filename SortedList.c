@@ -63,10 +63,14 @@ void removeSorted(struct SortedList *aList, int x){
 		if(temp->data == x){
 			if(prev != NULL){
 				prev->next = temp->next;
+				struct SortedNode *toFree = temp;
 				temp = temp->next;
+				free(toFree);
 			} else {
 				aList->head = temp->next;
+				struct SortedNode *toFree = temp;
 				temp = temp->next;
+				free(toFree);
 			}
 		} else {
 			prev = temp;
