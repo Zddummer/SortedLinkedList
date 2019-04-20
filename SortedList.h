@@ -3,15 +3,15 @@
 
 struct SortedList {
 	struct SortedNode *head;
-}
+};
 
 struct SortedNode {
 	int data;
 	struct SortedNode *next;
-}
+};
 
 //return a new empty list
-stuct SortedList * createSortedList();
+struct SortedList * createSortedList();
 
 //PRE: aList has been created and is sorted in descending order
 //insert x into aList so it remains sorted
@@ -32,4 +32,4 @@ void destroySortedList(struct SortedList *aList);
 //PRE: aList has been created
 //print the contents of the list to standard out
 //the elements in the list should be separated by commas
-void printList((struct SortedList *aList);
+void printList(struct SortedList *aList);
